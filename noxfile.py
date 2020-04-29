@@ -4,7 +4,7 @@ import nox
 session = functools.partial(nox.session, reuse_venv=True)
 
 
-@session(python=["2", "3", "pypy"])
+@session(python=["2", "3.7", "3.8", "pypy"])
 def test(session):
     session.install("pytest")
     session.run("pytest", "tests/")
