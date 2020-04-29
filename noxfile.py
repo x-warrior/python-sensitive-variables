@@ -1,16 +1,16 @@
 import functools
 import nox
 
-session = functools.partial(nox.session)
+session = functools.partial(nox.session, reuse_venv=True)
 
 
-@session(python=["2.7", "3.7", "3.8", "pypy"])
+@session(python=["2", "3.7", "3.8", "pypy"])
 def test(session):
     session.install("pytest")
     session.run("pytest", "tests/")
 
 
-@session(python=["2.7", "3.7", "3.8"])
+@session(python=["3.7", "3.8"])
 def lint(session):
     session.install("black")
     session.install("flake8")
@@ -21,13 +21,13 @@ def lint(session):
     session.run("mypy", "tests", "sensitive_variables")
 
 
-@session(python=["2.7", "3.7", "3.8"])
+@session(python=["3.7", "3.8"])
 def format(session):
     session.install("black")
     session.run("black", ".")
 
 
-@session(python=["2.7", "3.7", "3.8"])
+@session(python=["3.7", "3.8"])
 def release(session):
     session.install("twine")
 
