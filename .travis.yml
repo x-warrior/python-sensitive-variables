@@ -8,5 +8,5 @@ install:
   - pip install nox
 
 script:
-  - nox -e test -p $TRAVIS_PYTHON_VERSION
-  - nox -e lint -p $TRAVIS_PYTHON_VERSION
+  - nox -e test-$TRAVIS_PYTHON_VERSION
+  - nox -e lint-$TRAVIS_PYTHON_VERSION
