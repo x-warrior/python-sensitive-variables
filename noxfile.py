@@ -1,7 +1,7 @@
 import functools
 import nox
 
-session = functools.partial(nox.session, reuse_venv=True)
+session = functools.partial(nox.session)
 
 
 @session(python=["2", "3.7", "3.8", "pypy"])
