@@ -2,7 +2,7 @@ language: generic
 dist: bionic
 
 install:
-  - pip3 install nox
+  - pip3 install --user nox
 
 script:
   - nox -e test
