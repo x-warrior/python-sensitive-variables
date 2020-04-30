@@ -4,9 +4,9 @@ python:
 dist: bionic
 
 before_install:
-  - pyenv install 2.7
-  - pyenv install 3.8
-  - pyenv install pypy
+  - pyenv install -s 2.7
+  - pyenv install -s 3.8
+  - pyenv install -s pypy
   - python2.7 --version
   - python3.7 --version
   - python3.8 --version
