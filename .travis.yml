@@ -7,7 +7,7 @@ python:
 dist: xenial
 
 install:
-  - pip install nox
+  - pip3 install nox
 
 script:
   - nox -e test-$TRAVIS_PYTHON_VERSION
