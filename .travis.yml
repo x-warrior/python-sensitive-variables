@@ -4,9 +4,9 @@ python:
 dist: bionic
 
 before_install:
-  - sudo pyenv install python2.7
-  - sudo pyenv install python3.8
-  - sudo pyenv install pypy
+  - pyenv install python2.7
+  - pyenv install python3.8
+  - pyenv install pypy
   - python2.7 --version
   - python3.7 --version
   - python3.8 --version
