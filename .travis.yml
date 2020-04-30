@@ -13,7 +13,7 @@ before_install:
 
 install:
   - pip install setuptools
-  - pip install --user nox
+  - pip install nox
 
 script:
   - nox -e test
