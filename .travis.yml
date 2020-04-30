@@ -11,12 +11,10 @@ before_install:
   - python3.7 --version
   - python3.8 --version
   - pypy --version
-  - sudo apt-get update
-  - sudo apt install -y python3-pip
 
 install:
-  - pip3 install setuptools
-  - pip3 install --user nox
+  - pip install setuptools
+  - pip install --user nox
 
 script:
   - nox -e test
