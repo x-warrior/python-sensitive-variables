@@ -10,7 +10,7 @@ def test(session):
     session.run("pytest", "tests/")
 
 
-@session(python=["2.7", "3.7", "3.8", "pypy"])
+@session(python=["3.7"])
 def lint(session):
     session.install("black")
     session.install("flake8")
