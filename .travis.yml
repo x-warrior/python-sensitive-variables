@@ -2,6 +2,10 @@ language: generic
 dist: bionic
 
 before_install:
+  - python2.7 --version
+  - python3.7 --version
+  - python3.8 --version
+  - pypy --version
   - sudo apt-get update
   - sudo apt install -y python3-pip
 
