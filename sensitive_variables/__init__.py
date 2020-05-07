@@ -1,5 +1,6 @@
 import sys
 import platform
+from collections import MutableMapping
 
 from functools import wraps
 
@@ -71,7 +72,7 @@ def get_all_variables():
         yield x.f_locals
 
 
-def _scrub_locals_from_traceback(traceback, names, depth=1):
+def _scrub_locals_from_traceback(traceback, names, depth=1, mutablemapping_scrub_fn=None):
     # type: (Optional[TracebackType], Tuple[str, ...], int) -> None
     for frame in _iter_stacks(traceback):
         if frame.f_globals.get("__name__") == __name__:
@@ -88,6 +89,13 @@ def _scrub_locals_from_traceback(traceback, names, depth=1):
             continue
 
         locals_modified = False
+
+        if mutablemapping_scrub_fn:
+            for local in locals:
+                object = locals[local]
+                if isinstance(object, MutableMapping):
+                    mutablemapping_scrub_fn(object)
+                    locals_modified = True
 
         if names:
             for name in names:
