@@ -92,9 +92,9 @@ def _scrub_locals_from_traceback(traceback, names, depth=1, mutablemapping_scrub
 
         if mutablemapping_scrub_fn:
             for local in locals:
-                object = locals[local]
-                if isinstance(object, MutableMapping):
-                    mutablemapping_scrub_fn(object)
+                obj = locals[local]
+                if isinstance(obj, MutableMapping):
+                    mutablemapping_scrub_fn(obj)
                     locals_modified = True
 
         if names:
