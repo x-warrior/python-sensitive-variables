@@ -33,6 +33,7 @@ results in:
 ## How does it work?
 
 When the decorated function throws an exception, `sensitive_variables` walks through the traceback, removes sensitive data from `frame.f_locals` and reraises the exception.
+If mutablemapping_scrub_fn is set and there is a MutableMapping instance on locals, it will call the function with the instance as parameter.
 
 This is usually not problematic because a function that just threw an exception is unlikely to still use its local variables.
 
