@@ -72,8 +72,10 @@ def get_all_variables():
         yield x.f_locals
 
 
-def _scrub_locals_from_traceback(traceback, names, depth=1, mutablemapping_scrub_fn=None):
-    # type: (Optional[TracebackType], Tuple[str, ...], int) -> None
+def _scrub_locals_from_traceback(
+    traceback, names, depth=1, mutablemapping_scrub_fn=None
+):
+    # type: (Optional[TracebackType], Tuple[str, ...], int, Optional[Callable[[MutableMapping[Any, Any]], None]]) -> None
     for frame in _iter_stacks(traceback):
         if frame.f_globals.get("__name__") == __name__:
             continue

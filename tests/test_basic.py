@@ -56,7 +56,7 @@ def test_basic(no_cyclic_references):
 
 def test_basic_mutablemapping(no_cyclic_references):
     def scrub(d_):
-        d_.pop('field_special', None)
+        d_.pop("field_special", None)
 
     def f():
         is_test_func = True  # noqa
@@ -64,10 +64,7 @@ def test_basic_mutablemapping(no_cyclic_references):
         @sensitive_variables("password", mutablemapping_scrub_fn=scrub)
         def login_user(username, password):
             is_inside_func = True  # noqa
-            d = {
-                'field_special': 'secret123',
-                'normal': 'not secret'
-            }
+            d = {"field_special": "secret123", "normal": "not secret"}  # noqa
             print("logging in " + username + password)
 
         try:
