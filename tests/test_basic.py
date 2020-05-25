@@ -67,7 +67,7 @@ def test_basic_no_arguments(no_cyclic_references):
         @sensitive_variables()
         def login_user(username, password):
             is_inside_func = True  # noqa
-            to_clean = {"dict": "a"}
+            to_clean = {"dict": "a"}  # noqa
             print("logging in " + username + password)
 
         try:
