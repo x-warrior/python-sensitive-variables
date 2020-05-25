@@ -103,9 +103,8 @@ def _scrub_locals_from_traceback(traceback, names, depth=1, custom_scrub_fn=None
                     locals[name] = PLACEHOLDER
                     locals_modified = True
         else:
-            if not names and not custom_scrub_fn:
-                for k, v in locals.items():
-                    locals[k] = PLACEHOLDER
+            for k, v in locals.items():
+                locals[k] = PLACEHOLDER
             locals_modified = True
 
         if locals_modified:
