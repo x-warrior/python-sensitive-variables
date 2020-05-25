@@ -147,9 +147,6 @@ def test_basic_custom_scrub_fn_reference_without_names(no_cyclic_references):
         def login_user(username, password):
             is_inside_func = True  # noqa
             test_dict = {"field_special": "secret123", "normal": "not secret"}  # noqa
-            test_user_dict = UserDict(  # noqa
-                {"field_special": "secret123", "normal": "not secret"}
-            )
             print("logging in " + username + password)
 
         try:
@@ -165,9 +162,6 @@ def test_basic_custom_scrub_fn_reference_without_names(no_cyclic_references):
         assert wrapper_locals["f"]
         # Assert real functionality
         assert locals["test_dict"] == {"new_dict": "a"}
-        assert locals["test_user_dict"] == UserDict(
-            {"field_special": "secret123", "normal": "not secret"}
-        )
 
     no_cyclic_references(f)
 
