@@ -134,6 +134,45 @@ def test_basic_custom_scrub_fn_reference(no_cyclic_references):
     no_cyclic_references(f)
 
 
+def test_basic_custom_scrub_fn_reference_without_names(no_cyclic_references):
+    def scrub_dict(local_value, variable_name):
+        if isinstance(local_value, dict):
+            return True, {"new_dict": "a"}
+        return False, local_value
+
+    def f():
+        is_test_func = True  # noqa
+
+        @sensitive_variables(custom_scrub_fn=scrub_dict)
+        def login_user(username, password):
+            is_inside_func = True  # noqa
+            test_dict = {"field_special": "secret123", "normal": "not secret"}  # noqa
+            test_user_dict = UserDict(  # noqa
+                {"field_special": "secret123", "normal": "not secret"}
+            )
+            print("logging in " + username + password)
+
+        try:
+            login_user(None, "secret123")
+        except TypeError:
+            test_locals, wrapper_locals, locals = get_all_variables()
+        else:
+            assert False
+
+        # Assert that we got the right frames
+        assert test_locals["is_test_func"]
+        assert locals["is_inside_func"]
+        assert wrapper_locals["f"]
+        # Assert real functionality
+        assert locals["test_dict"] == {"new_dict": "a"}
+        assert locals["test_user_dict"] == UserDict(
+            {"field_special": "secret123", "normal": "not secret"}
+        )
+
+    no_cyclic_references(f)
+
+
+
 def test_basic_custom_scrub_fn_int(no_cyclic_references):
     def scrub_var(local_value, variable_name):
         if variable_name == "to_scrub":
