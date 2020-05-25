@@ -166,7 +166,6 @@ def test_basic_custom_scrub_fn_reference_without_names(no_cyclic_references):
     no_cyclic_references(f)
 
 
-
 def test_basic_custom_scrub_fn_int(no_cyclic_references):
     def scrub_var(local_value, variable_name):
         if variable_name == "to_scrub":
